@@ -1,0 +1,53 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.github.santacionx</groupId>
+  <artifactId>deploynexus</artifactId>
+  <version>1.0.0</version>
+  <name>deploynexus Library</name>
+  <description>A simple deploynexus Java library for Maven Central demo</description>
+  <url>https://github.com/santacionx/deploynexus</url>
+
+  <licenses>
+    <license>
+      <name>The Apache License, Version 2.0</name>
+      <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <scm>
+    <url>https://github.com/santacionx/deploynexus</url>
+    <connection>scm:git:git://github.com/santacionx/deploynexus.git</connection>
+    <developerConnection>scm:git:ssh://github.com/santacionx/deploynexus.git</developerConnection>
+  </scm>
+
+  <developers>
+    <developer>
+      <id>santacionx</id>
+      <name>Savitha </name>
+      <url>https://github.com/santacionx</url>
+    </developer>
+  </developers>
+
+  <dependencies>
+
+  </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.sonatype.central</groupId>
+        <artifactId>central-publishing-maven-plugin</artifactId>
+        <version>0.8.0</version>
+        <extensions>true</extensions>
+        <configuration>
+          <publishingServerId>central</publishingServerId>
+          <autoPublish>true</autoPublish>
+          <waitUntil>published</waitUntil>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>
+
