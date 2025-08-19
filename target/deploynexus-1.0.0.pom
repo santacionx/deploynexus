@@ -1,14 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
 
+  <!-- Coordinates -->
   <groupId>io.github.santacionx</groupId>
   <artifactId>deploynexus</artifactId>
   <version>1.0.0</version>
   <packaging>jar</packaging>
 
+  <!-- Project metadata required by Central -->
   <name>deploynexus</name>
   <description>A simple Java library to test Maven Central deployment</description>
   <url>https://github.com/santacionx/deploynexus</url>
@@ -37,47 +40,76 @@
     <tag>HEAD</tag>
   </scm>
 
-  <distributionManagement>
-    <repository>
-      <id>central</id>
-      <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-    </repository>
-    <snapshotRepository>
-      <id>central</id>
-      <url>https://s01.oss.sonatype.org/content/repositories/snapshots/</url>
-    </snapshotRepository>
-  </distributionManagement>
+  <!-- Properties -->
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.release>8</maven.compiler.release>
+    <gpg.keyname>4DC096C432F4501EEF87695EE65F1D39E45A6A85</gpg.keyname>
+    <!-- Do NOT put the passphrase here. Provide it via env or settings.xml -->
+  </properties>
 
   <build>
     <plugins>
 
-      <!-- Source JAR plugin -->
+      <!-- Central Publisher Portal (replaces legacy OSSRH deploy) -->
       <plugin>
+        <groupId>org.sonatype.central</groupId>
+        <artifactId>central-publishing-maven-plugin</artifactId>
+        <version>0.8.0</version>
+        <extensions>true</extensions>
+        <configuration>
+          <!-- Must match the <server><id> in ~/.m2/settings.xml -->
+          <publishingServerId>central</publishingServerId>
+          <!-- Optional CI-friendly flags:
+               <autoPublish>true</autoPublish>
+               <waitUntil>published</waitUntil>
+          -->
+        </configuration>
+      </plugin>
+
+      <!-- Compiler: prefer 'release' over -source/-target -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.13.0</version>
+        <configuration>
+          <release>${maven.compiler.release}</release>
+        </configuration>
+      </plugin>
+
+      <!-- Source JAR -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-source-plugin</artifactId>
         <version>3.2.1</version>
         <executions>
           <execution>
             <id>attach-sources</id>
             <phase>verify</phase>
-            <goals><goal>jar</goal></goals>
+            <goals>
+              <goal>jar</goal>
+            </goals>
           </execution>
         </executions>
       </plugin>
 
-      <!-- Javadoc JAR plugin -->
+      <!-- Javadoc JAR -->
       <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
         <version>3.3.1</version>
         <executions>
           <execution>
             <id>attach-javadocs</id>
             <phase>verify</phase>
-            <goals><goal>jar</goal></goals>
+            <goals>
+              <goal>jar</goal>
+            </goals>
           </execution>
         </executions>
       </plugin>
 
-      <!-- GPG Signing plugin -->
+      <!-- GPG signing -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-gpg-plugin</artifactId>
@@ -86,7 +118,9 @@
           <execution>
             <id>sign-artifacts</id>
             <phase>verify</phase>
-            <goals><goal>sign</goal></goals>
+            <goals>
+              <goal>sign</goal>
+            </goals>
           </execution>
         </executions>
         <configuration>
@@ -97,18 +131,20 @@
           </gpgArguments>
           <useAgent>false</useAgent>
           <keyname>${gpg.keyname}</keyname>
+          <!-- Pass the passphrase via env (GPG_PASSPHRASE) or settings.xml -->
         </configuration>
       </plugin>
 
     </plugins>
   </build>
 
+  <!-- Optional: GPG profile to toggle signing-related props -->
   <profiles>
     <profile>
       <id>gpg</id>
       <properties>
         <gpg.keyname>4DC096C432F4501EEF87695EE65F1D39E45A6A85</gpg.keyname>
-        <gpg.passphrase>kudugi</gpg.passphrase>
+        <!-- Avoid committing passphrases. Use ${env.GPG_PASSPHRASE} or settings.xml -->
       </properties>
     </profile>
   </profiles>
