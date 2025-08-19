@@ -1,0 +1,38 @@
+@options
+@packages
+-encoding
+'UTF-8'
+-protected
+-sourcepath
+'/Users/savitha/Desktop/java-enterprise-labs/maven-central-demo/maven-central-demo/deploynexus/src/main/java:/Users/savitha/Desktop/java-enterprise-labs/maven-central-demo/maven-central-demo/deploynexus/target/generated-sources/annotations'
+-author
+-bottom
+'Copyright &#169; 2025. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'/Users/savitha/Desktop/java-enterprise-labs/maven-central-demo/maven-central-demo/deploynexus/target/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'deploynexus Library 1.0.0 API'
+-use
+-version
+-windowtitle
+'deploynexus Library 1.0.0 API'
+com.github.santacionx.deploynexus
+/Users/savitha/Desktop/java-enterprise-labs/maven-central-demo/maven-central-demo/deploynexus/src/main/java = 1755592155611
+/Users/savitha/Desktop/java-enterprise-labs/maven-central-demo/maven-central-demo/deploynexus/target/generated-sources/annotations = 1755594830359
+/Users/savitha/Desktop/java-enterprise-labs/maven-central-demo/maven-central-demo/deploynexus/target/apidocs/tag-search-index.js = 1755594831625
+/Users/savitha/Desktop/java-enterprise-labs/maven-central-demo/maven-central-demo/deploynexus/target/apidocs/overview-tree.html = 1755594831620
+/Users/savitha/Desktop/java-enterprise-labs/maven-central-demo/maven-central-demo/deploynexus/target/apidocs/module-search-index.js = 1755594831625
+/Users/savitha/Desktop/java-enterprise-labs/maven-central-demo/maven-central-demo/deploynexus/target/apidocs/index.html = 1755594831630
+/Users/savitha/Desktop/java-enterprise-labs/maven-central-demo/maven-central-demo/deploynexus/target/apidocs/package-search-index.js = 1755594831625
+/Users/savitha/Desktop/java-enterprise-labs/maven-central-demo/maven-central-demo/deploynexus/target/apidocs/index-all.html = 1755594831628
+/Users/savitha/Desktop/java-enterprise-labs/maven-central-demo/maven-central-demo/deploynexus/target/apidocs/allpackages-index.html = 1755594831624
+/Users/savitha/Desktop/java-enterprise-labs/maven-central-demo/maven-central-demo/deploynexus/target/apidocs/member-search-index.js = 1755594831625
+/Users/savitha/Desktop/java-enterprise-labs/maven-central-demo/maven-central-demo/deploynexus/target/apidocs/help-doc.html = 1755594831631
+/Users/savitha/Desktop/java-enterprise-labs/maven-central-demo/maven-central-demo/deploynexus/target/apidocs/element-list = 1755594831607
+/Users/savitha/Desktop/java-enterprise-labs/maven-central-demo/maven-central-demo/deploynexus/target/apidocs/search.html = 1755594831629
+/Users/savitha/Desktop/java-enterprise-labs/maven-central-demo/maven-central-demo/deploynexus/target/apidocs/allclasses-index.html = 1755594831624
+/Users/savitha/Desktop/java-enterprise-labs/maven-central-demo/maven-central-demo/deploynexus/target/apidocs/type-search-index.js = 1755594831625

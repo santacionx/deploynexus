@@ -1,0 +1,1 @@
+memberSearchIndex = [{"p":"com.github.santacionx.deploynexus","c":"App","l":"App()","u":"%3Cinit%3E()"},{"p":"com.github.santacionx.deploynexus","c":"App","l":"sayHello(String)","u":"sayHello(java.lang.String)"}];updateSearchResults();
