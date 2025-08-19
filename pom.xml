@@ -1,62 +1,82 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.github.santacionx</groupId>
+
+  <groupId>io.github.santacionx</groupId>
   <artifactId>deploynexus</artifactId>
   <version>1.0.0</version>
-  <name>deploynexus Library</name>
-  <description>A simple deploynexus Java library for Maven Central demo</description>
+  <packaging>jar</packaging>
+
+  <name>deploynexus</name>
+  <description>A simple Java library to test Maven Central deployment</description>
   <url>https://github.com/santacionx/deploynexus</url>
 
   <licenses>
     <license>
       <name>The Apache License, Version 2.0</name>
       <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
-      <distribution>repo</distribution>
     </license>
   </licenses>
 
   <scm>
     <url>https://github.com/santacionx/deploynexus</url>
-    <connection>scm:git:git://github.com/santacionx/deploynexus.git</connection>
-    <developerConnection>scm:git:ssh://github.com/santacionx/deploynexus.git</developerConnection>
+    <connection>scm:git:https://github.com/santacionx/deploynexus.git</connection>
+    <developerConnection>scm:git:git@github.com:santacionx/deploynexus.git</developerConnection>
   </scm>
 
   <developers>
     <developer>
       <id>santacionx</id>
-      <name>Savitha </name>
+      <name>Savitha</name>
       <url>https://github.com/santacionx</url>
     </developer>
   </developers>
 
-  <dependencies>
-
-  </dependencies>
   <distributionManagement>
+    <snapshotRepository>
+      <id>ossrh</id>
+      <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+    </snapshotRepository>
     <repository>
-      <id>central</id>
-      <url>https://central.sonatype.com/api/v1/publish/</url>
+      <id>ossrh</id>
+      <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
     </repository>
   </distributionManagement>
 
   <build>
     <plugins>
-      <!-- JAR with sources -->
+      <!-- Source Jar -->
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-source-plugin</artifactId>
         <version>3.2.1</version>
         <executions>
           <execution>
             <id>attach-sources</id>
-            <goals><goal>jar</goal></goals>
+            <phase>verify</phase>
+            <goals>
+              <goal>jar</goal>
+            </goals>
           </execution>
         </executions>
       </plugin>
 
+      <!-- Javadoc Jar -->
+      <plugin>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>3.3.1</version>
+        <executions>
+          <execution>
+            <id>attach-javadocs</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
 
-      <!-- GPG Sign -->
+      <!-- GPG Signing -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-gpg-plugin</artifactId>
@@ -70,38 +90,32 @@
             </goals>
           </execution>
         </executions>
-      </plugin>
-      <!-- other plugins here -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-source-plugin</artifactId>
-        <version>3.2.1</version>
-        <executions>
-          <execution>
-            <id>attach-sources</id>
-            <goals>
-              <goal>jar</goal>
-            </goals>
-          </execution>
-        </executions>
+        <configuration>
+          <gpgArguments>
+            <arg>--batch</arg>
+            <arg>--pinentry-mode</arg>
+            <arg>loopback</arg>
+          </gpgArguments>
+          <useAgent>false</useAgent>
+          <keyname>4DC096C432F4501EEF87695EE65F1D39E45A6A85</keyname>
+        </configuration>
       </plugin>
 
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-javadoc-plugin</artifactId>
-        <version>3.3.1</version>
-        <executions>
-          <execution>
-            <id>attach-javadocs</id>
-            <goals>
-              <goal>jar</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
     </plugins>
   </build>
 
+  <profiles>
+    <profile>
+      <id>gpg</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+      <properties>
+        <gpg.executable>gpg</gpg.executable>
+        <gpg.keyname>YourKeyID</gpg.keyname>
+        <gpg.passphrase>YourPassphrase</gpg.passphrase>
+      </properties>
+    </profile>
+  </profiles>
 
 </project>
-
